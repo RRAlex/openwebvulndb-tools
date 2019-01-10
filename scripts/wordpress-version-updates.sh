@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # openwebvulndb-tools: A collection of tools to maintain vulnerability databases
 # Copyright (C) 2016-  Delve Labs inc.
@@ -33,7 +33,7 @@ popd
 
 python -m openwebvulndb.wordpress list_plugins
 python -m openwebvulndb.wordpress list_themes
-timeout ${POPULATE_TIMEOUT:-8h} python -m openwebvulndb.wordpress populate_versions
+timeout ${POPULATE_TIMEOUT:-8h} python -m openwebvulndb.wordpress populate_versions || true
 
 pushd data
 git add -A
